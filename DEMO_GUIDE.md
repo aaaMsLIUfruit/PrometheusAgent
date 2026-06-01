@@ -28,6 +28,11 @@ No resources found in bookinfo namespace.
 3. 系统会自动选择工具、自动生成 `PromQL`
 4. 当我们人为改变微服务状态后，系统确实能检测出变化
 
+补充说明：
+
+- 本系统现在通过 LangChain + LLM 完成问题理解和工具选择
+- 在运行前，需要先在 `config.py` 中填写 `OPENAI_API_KEY`
+
 ---
 
 ## 2. 你需要的目录
@@ -35,19 +40,16 @@ No resources found in bookinfo namespace.
 ### 项目目录
 
 ```text
-<PROJECT_DIR>
+E:\desktop\微服务
 ```
 
 ### Istio 目录
 
 ```text
-<ISTIO_DIR>
+E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1
 ```
 
-下面文档里的命令都用占位符表示，你在自己电脑上只需要替换：
-
-- `<PROJECT_DIR>`：你的项目目录
-- `<ISTIO_DIR>`：你的 Istio 根目录
+下面文档里的命令默认按你当前电脑上的这两个目录执行。
 
 ---
 
@@ -118,7 +120,7 @@ No resources found in bookinfo namespace.
 执行：
 
 ```powershell
-& "<ISTIO_DIR>\bin\istioctl.exe" version
+& "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\bin\istioctl.exe" version
 ```
 
 ### 6.2 安装 Istio demo profile
@@ -126,7 +128,7 @@ No resources found in bookinfo namespace.
 执行：
 
 ```powershell
-& "<ISTIO_DIR>\bin\istioctl.exe" install --set profile=demo -y
+& "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\bin\istioctl.exe" install --set profile=demo -y
 ```
 
 ### 6.3 验证 Istio
@@ -176,7 +178,7 @@ kubectl label namespace bookinfo istio-injection=enabled --overwrite
 执行：
 
 ```powershell
-kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\platform\kube\bookinfo.yaml"
+kubectl apply -n bookinfo -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\bookinfo\platform\kube\bookinfo.yaml"
 ```
 
 ### 7.4 部署网关规则
@@ -184,7 +186,7 @@ kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\platform\kube\bookinf
 执行：
 
 ```powershell
-kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\networking\bookinfo-gateway.yaml"
+kubectl apply -n bookinfo -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\bookinfo\networking\bookinfo-gateway.yaml"
 ```
 
 ### 7.5 验证 Bookinfo
@@ -220,7 +222,7 @@ Pod 中应出现并运行：
 执行：
 
 ```powershell
-kubectl apply -f "<ISTIO_DIR>\samples\addons\prometheus.yaml"
+kubectl apply -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\addons\prometheus.yaml"
 ```
 
 然后执行：
@@ -260,7 +262,7 @@ kubectl -n istio-system port-forward svc/prometheus 9090:9090
 ### 终端 C：启动项目
 
 ```powershell
-cd <PROJECT_DIR>
+cd E:\desktop\微服务
 python -m streamlit run app.py
 ```
 
@@ -440,7 +442,7 @@ Inject Delay Fault
 执行：
 
 ```powershell
-kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\networking\virtual-service-ratings-test-delay.yaml"
+kubectl apply -n bookinfo -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\bookinfo\networking\virtual-service-ratings-test-delay.yaml"
 ```
 
 然后再打一轮流量：
@@ -523,7 +525,7 @@ Reset Traffic Rules
 执行：
 
 ```powershell
-kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\networking\virtual-service-all.yaml"
+kubectl apply -n bookinfo -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\bookinfo\networking\virtual-service-all.yaml"
 ```
 
 ### 讲解词
@@ -539,12 +541,12 @@ kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\networking\virtual-se
 ### 21.1 如果环境没起
 
 ```powershell
-& "<ISTIO_DIR>\bin\istioctl.exe" install --set profile=demo -y
+& "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\bin\istioctl.exe" install --set profile=demo -y
 kubectl create namespace bookinfo
 kubectl label namespace bookinfo istio-injection=enabled --overwrite
-kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\platform\kube\bookinfo.yaml"
-kubectl apply -n bookinfo -f "<ISTIO_DIR>\samples\bookinfo\networking\bookinfo-gateway.yaml"
-kubectl apply -f "<ISTIO_DIR>\samples\addons\prometheus.yaml"
+kubectl apply -n bookinfo -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\bookinfo\platform\kube\bookinfo.yaml"
+kubectl apply -n bookinfo -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\bookinfo\networking\bookinfo-gateway.yaml"
+kubectl apply -f "E:\Social_apps\QQ\downlowd\istio-1.29.1-win-amd64\istio-1.29.1\samples\addons\prometheus.yaml"
 ```
 
 ### 21.2 打开转发
@@ -557,7 +559,7 @@ kubectl -n istio-system port-forward svc/prometheus 9090:9090
 ### 21.3 启动项目
 
 ```powershell
-cd <PROJECT_DIR>
+cd E:\desktop\微服务
 python -m streamlit run app.py
 ```
 

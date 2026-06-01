@@ -37,8 +37,9 @@ BOOKINFO_WORKLOAD_PATTERNS = {
 
 DEFAULT_TIME_WINDOW_MINUTES = 5
 DEFAULT_QUERY_STEP_SECONDS = 30
-REQUEST_TIMEOUT_SECONDS = 5
+REQUEST_TIMEOUT_SECONDS = 8
 KUBECTL_TIMEOUT_SECONDS = 8
+
 LIVE_LOAD_REQUEST_COUNT = int(os.getenv("LIVE_LOAD_REQUEST_COUNT", "80"))
 DELAY_INJECTION_FILE = os.getenv(
     "DELAY_INJECTION_FILE",
@@ -52,7 +53,6 @@ ROUTE_RESET_FILE = os.getenv(
 MODE_REAL = "Real Environment"
 MODE_MOCK_NORMAL = "Mock Normal"
 MODE_MOCK_ABNORMAL = "Mock Abnormal"
-
 DATA_MODES = [MODE_REAL, MODE_MOCK_NORMAL, MODE_MOCK_ABNORMAL]
 
 METRIC_LABELS = {
@@ -72,3 +72,7 @@ METRIC_UNITS = {
     "latency": "ms",
     "restart": "count",
 }
+
+# Fill this value directly before demo/push if you want real LangChain + OpenAI agent behavior.
+OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE"
+OPENAI_MODEL = "gpt-4.1-mini"

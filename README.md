@@ -1,6 +1,6 @@
 # Bookinfo Monitoring QA Assistant
 
-This project is a lightweight monitoring QA demo for the Bookinfo microservice system. It wraps Prometheus queries into explicit tools, lets users ask questions in natural language, and supports both live and mock data for stable classroom demos.
+This project is a lightweight LangChain-based monitoring agent for the Bookinfo microservice system. It wraps Prometheus queries into explicit tools, lets users ask questions in natural language, and uses LangChain plus an OpenAI chat model to plan intent and tool selection before executing real monitoring queries.
 
 ## What it covers
 
@@ -30,6 +30,15 @@ This project is a lightweight monitoring QA demo for the Bookinfo microservice s
 ```bash
 pip install -r requirements.txt
 ```
+
+## Configure LLM API
+
+Before using the real LLM planner, fill these values in `config.py`:
+
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL` if you want a different model
+
+The current implementation uses `LangChain` + `langchain-openai` in `llm_client.py`.
 
 ## Live environment setup
 

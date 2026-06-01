@@ -15,7 +15,7 @@ from tool_registry import get_tool_registry
 st.set_page_config(page_title="Bookinfo Monitoring QA Assistant", layout="wide")
 
 st.title("Bookinfo Monitoring QA Assistant")
-st.caption("Prometheus-backed natural-language monitoring, health reports, live environment actions, and before/after comparisons")
+st.caption("Prometheus-backed LLM agent for natural-language monitoring, tool selection, reports, and live environment actions")
 
 if "baseline_snapshot" not in st.session_state:
     st.session_state.baseline_snapshot = None
@@ -101,6 +101,9 @@ with tabs[0]:
         st.write(user_question)
         st.markdown("**Parsed Result**")
         st.json(result["parsed"])
+        if result["parsed"].get("planner_reasoning"):
+            st.markdown("**LLM Planner Reasoning**")
+            st.write(result["parsed"]["planner_reasoning"])
         st.markdown("**Selected Tools**")
         st.json(result["selected_tools"])
 
